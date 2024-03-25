@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About A3fitness</title>
+    <link rel="stylesheet" href="styles.css"> 
+    <style>
+        /* Global styles */
+        body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+        }
+
+        .header h1{
+            font-size: 60px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .contact{
+            left:10%;
+            position: absolute;
+        }
+
+        .header {
+        display: flex;
+        width: 100%;
+        justify-content: center; /* Align items with space between */
+        align-items: center; /* Align items vertically */
+        padding: 10px;
+        background-color: #333;
+        color: white;
+        }
+        .logo img {
+            left:10px;
+            top:20px;
+            position: absolute;
+
+            height: 100px;
+            width: 100px;
+        }
+        main {
+        padding: 20px;
+        }
+
+        .about-section {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-section h2 {
+        color: #333;
+        font-size: 50px;
+        margin-bottom: 20px;
+        font-family: 'Times New Roman', Times, serif;
+        }
+
+        .about-section h3 {
+        color: #555;
+        font-size: 40px;
+        margin-bottom: 10px;
+        font-family: 'Times New Roman', Times, serif;
+        }
+
+        .about-section p {
+        color: #666;
+        font-size: 30px;
+        font-family: 'Times New Roman', Times, serif;
+        line-height: 1.6;
+        margin-bottom: 15px;
+        }
+
+        .about-section ul {
+        color: #666;
+        font-size: 25px;
+        list-style-type: disc;
+        margin-left: 20px;
+        margin-bottom: 15px;
+        font-family: 'Times New Roman', Times, serif;
+        }
+
+        /* Footer styles */
+        footer {
+            display: flex ;
+            justify-content: center;
+            margin-left: 20px;
+            font-size: 40px;
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            
+        }
+
+        footer p {
+        font-size: 30px;
+        }
+
+        /* Media query for responsiveness */
+        @media (max-width: 768px) {
+        main {
+            padding: 10px;
+        }
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <div class="logo">
+                <a href="{{ url_for('goto', page='/home') }}">
+                    <img src="{{ url_for('static', filename='images/a3f.png') }}" alt="Logo">
+                </a>
+                
+            </div>
+            <div>
+                <h1>Exercise Tracker</h1>
+            </div>
+    </header>
+
+    <main>
+        <section class="about-section">
+            <h2>About A3fitness</h2>
+            <p>Welcome to A3fitness, your premier destination for holistic fitness and wellness. At A3fitness, we believe in empowering individuals to achieve their fitness goals, enhance their overall well-being, and live their best lives.</p>
+
+            <h3>Our Mission</h3>
+            <p>Our mission at A3fitness is simple: to inspire, motivate, and support individuals on their journey to better health and fitness. We strive to create a positive and inclusive environment where everyone feels welcome and encouraged to pursue their wellness goals.</p>
+
+            <h3>What We Offer</h3>
+            <ul>
+                <li>Comprehensive Exercise Programs</li>
+                <li>Demo Facilities</li>
+                <li>Position Tracker</li>
+                <li>BMI Calculator</li>
+                <li>User Report</li>
+            </ul>
+
+            <h3>Our Commitment</h3>
+            <p>At A3fitness, we are dedicated to fostering a supportive community where individuals can connect, learn, and grow together. We believe that fitness is not just about physical strength but also about mental resilience, emotional well-being, and overall vitality.</p>
+
+            <h3>Get Started Today!</h3>
+            <p>Ready to take the first step towards a healthier, happier you? Join us at A3fitness and embark on a journey of self-discovery, transformation, and empowerment. Whether you're a fitness enthusiast or a newcomer to the world of exercise, there's a place for you here.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="contact">
+            <h3>Contact Us</h3>
+        </div>
+        <div>
+            <p>For any inquiries or support, feel free to contact us:</p>
+            <p>Email: a3fitnes@gmail.com</p>
+        </div> 
+    </footer>
+</body>
+
+</html>

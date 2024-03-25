@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .toggle b {
+            margin: 0;
+            color: #fff;
+            font-size: 20px;
+        }
+        .user {
+            position: fixed;
+            top: 10px;
+            right: 30px;
+        }
+
+        .toggle-label {
+            display: inline-block;
+            width: 80px;
+            height: 50px; 
+            background-color: #ccc;
+            border-radius: 35px; 
+            position: relative;
+            cursor: pointer;
+            overflow: hidden; 
+        }
+
+       
+        .toggle-indicator {
+            position: absolute;
+            top: 12%;
+            transform: translateY(-50%);
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            transition: transform 0.3s ease, background-color 0.3s ease; 
+        }
+
+        .toggle-checkbox:not(:checked) + .toggle-label .toggle-indicator {
+            background-color: red; 
+            transform: translateX(0); 
+        }
+
+        .toggle-checkbox:checked + .toggle-label .toggle-indicator {
+            background-color: green;
+            transform: translateX(100%); 
+        }
+
+        .header {
+            display: flex;
+            width: 100%;
+            height: 100px;
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 10px;
+            background-color: #333;
+            color: white;
+        }
+
+        .logo img {
+            height: 100px;
+            width: 100px;
+        }
+        .title {
+            text-align: center;
+        }
+
+        .title h1 {
+            margin: 0;
+        }
+        body {
+        border: none;
+            color: rgb(0, 0, 0);
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            background-image: url("/static/images/bmi.png");
+            background-color: rgb(177, 192, 195);
+            background-size: cover; 
+            background-position: center;
+            background-repeat: no-repeat;
+            justify-content: center; 
+            align-items: center; 
+            font-family: Arial, sans-serif;
+            
+            display: flex;
+            flex-direction: column;
+            height: 100v;
+        }
+
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            margin-left: 20px;
+            margin-right: 20px;
+            font-size: 30px;
+            color: #17e039;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+
+        .container {
+            color: #e01717;
+            margin: 50px auto;
+            max-width: 600px;
+            background-color: #fff;
+            height: 400px;
+            
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+
+        input[type="number"] {
+            width: 90%;
+            background-color: rgb(221, 238, 242);
+            justify-content: center;
+            margin-bottom: 10px;
+            font-family: 'Times New Roman', Times, serif;
+            padding: 14px;
+            font-size: 20px;
+            border: 3px solid #17e039;
+            border-radius: 6px;
+        }
+
+        button {
+            padding: 15px 30px;
+            background-color: #f60909e3;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1fca28;
+        }
+        #head{
+            font-size: 40px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        #result {
+            font-size: 25px;
+            color:rgb(242, 11, 11);
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-family: 'Times New Roman', Times, serif;
+
+        }
+        .toggle-checkbox {
+            display: none;
+        }
+        .crr{
+            margin-top: 20px;
+            
+        }
+        
+
+
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <a href="{{ url_for('goto', page='/home') }}">
+                <img src="{{ url_for('static', filename='images/a3f.png') }}" alt="Logo">
+            </a>
+        </div>
+            <div id="head">
+            <h1> BMI Calculator</h1>
+        </div>
+        <div id="user">
+            {% if username %}
+                <p>Welcome, {{ username }}</p>
+                
+                <form action="/logout" method="post" class="logout-form">
+                    <input type="submit" value="Logout">
+                </form>
+            {% else %}
+                <p>Guest</p>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <div>
+        
+        <form>
+            <div class="toggle">
+                <b>Use Metric Units</b>
+                <input type="checkbox" id="unitToggle" class="toggle-checkbox" onchange="toggleUnits()">
+                <label for="unitToggle" class="toggle-label">
+                    <div class="toggle-indicator"></div>
+                </label>
+                <b>Use Imperial Units</b>
+            </div>
+            
+            
+            
+            <div class="container">
+                <h1>BMI Calculator</h1>
+                <div>
+                    <label for="weight" class>Weight (kg):</label>
+                    <input type="number"  id="weight" placeholder="Enter weight">
+                </div>
+                <div>
+                    <label for="height">Height (cm):</label>
+                    <input type="number" id="height" placeholder="Enter height">
+                </div>
+                <div class="crr">
+                    <button onclick="calculateBMI(event)">Calculate BMI</button>
+
+                    <button style="margin-left: 20px;" onclick="resetForm()">Reset</button>
+
+                    <div id="result"></div>
+                </div>
+                
+        </form>
+
+</body>
+
+</html>
+
+<script>
+    function toggleUnits() {
+    var unitToggle = document.getElementById("unitToggle");
+    var weightLabel = document.querySelector('label[for="weight"]');
+    var heightLabel = document.querySelector('label[for="height"]');
+
+    if (unitToggle.checked) {
+        weightLabel.innerText = "Weight (lbs):";
+        heightLabel.innerText = "Height (in):";
+    } else {
+        weightLabel.innerText = "Weight (kg):";
+        heightLabel.innerText = "Height (cm):";
+    }
+}
+function resetForm() {
+    document.getElementById("weight").value = "";
+    document.getElementById("height").value = "";
+    document.getElementById("result").innerHTML = "";
+}
+function calculateBMI(event) {
+    event.preventDefault(); // Prevent form submission
+
+    var weight = parseFloat(document.getElementById("weight").value);
+    var height = parseFloat(document.getElementById("height").value);
+    var unitToggle = document.getElementById("unitToggle");
+
+    if (!weight || !height) {
+        alert("Please enter valid weight and height.");
+        return;
+    }
+
+    if (unitToggle.checked) {
+        // Convert lbs to kg and inches to meters
+        weight = weight * 0.453592; // 1 lb = 0.453592 kg
+        height = height * 0.0254; // 1 inch = 0.0254 meters
+    } else {
+        // Convert centimeters to meters
+        weight = weight; 
+        height = height / 100; // 1 cm = 0.01 meters
+    }
+
+    var bmi = (weight / (height * height)).toFixed(2);
+    if (bmi<18.5){
+        var res="Underweight";
+    }
+    if(bmi>=18.5 && bmi<25)
+    {
+        var res="Normal";
+    }
+    if(bmi>=25 && bmi<30)
+    {
+        var res="Overweight";
+    }
+    if(bmi>=30 && bmi<35)
+    {
+        var res="Obese";
+    }
+    if(bmi>=35 && bmi<40)
+    {
+        var res="Obese 2";
+    }
+    if(bmi>=40)
+    {
+        var res="Extreme Obese";
+    }
+    var resultElement = document.getElementById("result");
+    resultElement.innerHTML = "Your BMI is: " + bmi +" "+ res;
+}
+document.getElementById('homeButton').addEventListener('click', function() {
+            // Send an AJAX request to the server
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    // Redirect to the home page after turning off the camera
+                    window.location.href = '/home';
+                }
+            };
+            xhr.send();
+        });
+
+</script>
