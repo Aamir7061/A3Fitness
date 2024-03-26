@@ -3,8 +3,6 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import math
-from pynput import keyboard
-from datetime import datetime,timedelta, timezone
 app = Flask(__name__)
 app.secret_key = '@amir'  
 #Global Variables
