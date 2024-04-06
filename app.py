@@ -479,6 +479,3 @@ def finished():
         return render_template('finished.html',username=session['username'], performance_data=total_exer,total_duration='Total Duration : {}'.format(a))
     else:
         return render_template('finished.html',username='Guest', performance_data=total_exer,total_duration='Total Duration : {}'.format(a))
-
-if __name__ == "__main__":
-    app.run(debug=True)
